@@ -16,17 +16,17 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+app.use(cors()); // Enable CORS for all origins
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api', referralRoutes);
 app.use('/api/referral', referralRoutes); 
 app.use('/api/notifications', notificationRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-
+// Test Routes
 app.get('/api', (req, res) => res.send('API route is working'));
 app.get('/', (req, res) => res.send('Main route is working'));
 
