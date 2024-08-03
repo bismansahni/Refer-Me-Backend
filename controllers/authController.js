@@ -4,20 +4,26 @@ import bcrypt from 'bcryptjs';
 
 
 export const register = async (req, res) => {
-    const { name, email, password } = req.body;
-    
-    try {
-      const user = new User({ name, email, password });
-      await user.save();
-  
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-  
-      res.status(201).json({ token ,name});
-    } catch (error) {
-      res.status(500).json({ error: 'Registration failed' });
+  const { name, email, password } = req.body;
+
+  try {
+    // Check if the email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ error: 'Email already exists' });
     }
-  };
-  
+
+    const user = new User({ name, email, password });
+    await user.save();
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+    res.status(201).json({ token, name });
+  } catch (error) {
+    res.status(500).json({ error: 'Registration failed' });
+  }
+};
+
   export const login = async (req, res) => {
     const { email, password } = req.body;
   
