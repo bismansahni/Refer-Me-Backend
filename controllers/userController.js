@@ -1,6 +1,13 @@
 import User from '../models/user_model.js';
 export const updateProfile = async (req, res) => {
-    const { current_job_role, current_company, resume } = req.body;
+    let { current_job_role, current_company, resume } = req.body;
+
+    if (current_job_role) {
+      current_job_role = current_job_role.toUpperCase();
+    }
+    if (current_company) {
+      current_company = current_company.toUpperCase();
+    }
     
     try {
       const user = await User.findByIdAndUpdate(
