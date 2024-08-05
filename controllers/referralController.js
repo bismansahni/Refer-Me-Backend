@@ -83,3 +83,16 @@ export const requestReferral = async (req, res) => {
     res.status(500).json({ error: 'Referral request failed' });
   }
 };
+
+
+export const getReferrals = async (req, res) => {
+  try {
+
+
+    const referrals = await ReferralRequest.find({ user: req.user.id });
+    res.status(200).json({ referrals });
+  } catch (error) {
+    console.error('Fetching referrals failed:', error);
+    res.status(500).json({ error: 'Fetching referrals failed' });
+  }
+};
