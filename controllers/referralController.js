@@ -102,7 +102,12 @@ import ReferralRequest from '../models/referral_request_model.js';
 import { addNotification } from '../services/notificationservices.js';
 
 export const requestReferral = async (req, res) => {
-  const { company_name, job_url } = req.body;
+  let { company_name, job_url } = req.body;
+
+  if (company_name) {
+    company_name = company_name.toUpperCase();
+  }
+  
 
   try {
     const user = await User.findById(req.user.id);
