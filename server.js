@@ -7,6 +7,7 @@ import referralRoutes from './routes/referralRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
 
 const app = express();
