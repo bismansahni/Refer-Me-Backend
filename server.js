@@ -56,7 +56,7 @@ connectDB();
 // CORS Configuration
 const corsOptions = {
   origin: 'https://refermeplatform.vercel.app', // Allow only your Vercel-hosted frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allow specific HTTP methods
 };
 
 // Middleware
